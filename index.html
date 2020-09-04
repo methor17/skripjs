@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bomberman</title>
+		<style type="text/css">
+			canvas {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#game{
+				position: relative;
+				margin: auto;
+				border: 1px solid black;
+				box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+			}
+			body{
+				text-align: center;
+			}
+			span{
+				width: 90px;
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="game">
+			<canvas id="buf1"></canvas>
+			<canvas id="buf2"></canvas>
+		</div>
+		<script src="a_star.js"></script>
+		<script src="main.js"></script>
+	</body>
+	
+</html>

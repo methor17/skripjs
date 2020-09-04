@@ -1,0 +1,62 @@
+<html>
+    <body>
+        <script src="HPA_star.js"></script>
+        <script>
+        //Set the number of rows and columns for the board
+        var rows = 15;
+        var columns = 15;
+
+        //Create the board, setting random squares to be obstacles
+        var board = [];
+        for (var x = 0; x < columns; x++)
+        {
+            board[x] = [];
+
+            for (var y = 0; y < rows; y++)
+            {
+                //Give each square a 25% chance of being an obstacle
+                var square = Math.floor(Math.random()*4);
+
+                //0 = open, 1 = obstacle
+                if (square == 0)
+                    board[x][y] = 1;
+                else
+                    board[x][y] = 0;
+            }
+        }
+    
+        //Set the start and destination squares (and guarantee they're not an obstacle)
+        var start = [1, 1];
+        board[1][1] = 0;
+
+        var destination = [8, 8];
+        board[8][8] = 0;
+
+        //Use A* to see if there's a path between them
+        var path = a_star(start, destination, board, rows, columns);
+
+        //Draw the board
+        for (var y = 0; y < rows; y++)
+        {
+            document.write("<div>");
+
+            for (var x = 0; x < columns; x++)        
+            {
+                document.write("<div id='board_"+x+"_"+y+"' style='"
+                    + "float: left;"
+                    + " width: 20; height: 20;"
+                    + " border: thin solid black;"
+                    + " background-color: "+(board[x][y] == 0 ? "white" : "black")
+                    + "'></div>");
+            }
+
+            document.write("<div style='clear: both;'></div>");
+            document.write("</div>");
+        }
+
+        //Highlight the path
+        for (var i = 0; i < path.length; i++)
+            document.getElementById("board_" + path[i].x + "_" + path[i].y).style.backgroundColor = "red";
+        </script>
+    </body>
+</html>
